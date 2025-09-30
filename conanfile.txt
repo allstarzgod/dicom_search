@@ -1,10 +1,21 @@
+# This file tells Conan which third-party libs we need and how to generate CMake integration.
+
 [requires]
+# Versions from ConanCenter. Adjust if you need different ones.
 sqlite3/3.50.4
 dcmtk/3.6.9
 
+[options]
+# Enable SQLite FTS5 so keyword search works.
+sqlite3*:enable_fts5=True
+# If you don’t want OpenSSL, XML, or JPEG in DCMTK, you can toggle dcmtk options here.
+# dcmtk*:with_openssl=True
+# dcmtk*:with_xml=True
+# dcmtk*:with_png=True
+# dcmtk*:with_jpeg=True
+
 [generators]
+# CMakeDeps: generates find_package() configs (FindSQLite3.cmake, DCMTKConfig.cmake, etc.)
+# CMakeToolchain: generates a toolchain file so CMake uses Conan’s settings/flags.
 CMakeDeps
 CMakeToolchain
-
-[layout]
-cmake_layout
